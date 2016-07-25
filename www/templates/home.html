@@ -1,44 +1,48 @@
-<ion-view view-title="MedicalBox" > 
-<ion-header-bar class="bar bar-calm">
-        <h1 class="title">MedicalBox</h1>
-      <!--  <ion-tabs>
-        <ion-tab icon="ion-ios-home-outline" tittle="home"></ion-tab>
-       </ion-tabs>-->
-       
+<ion-view view-title="Iniciar Sesión" > 
+<ion-header-bar >      
       </ion-header-bar>
       
 
         <ion-content> 
-          <div class="row">
-            <div class="col"> 
-                  <div class="card">
-                    <div class="item item-divider">
-                      <h2 class="title">Instalación</h2>
-                    </div>
-                    <div class="item item-divider">
-                      <img src="img/Clinica.jpg" class="full-image">
-                    </div>
-                    <div class="item item-text-wrap">
-                      es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
-                    </div>
-                   </div>
-
-             </div>
-              
-              <div class="col"><div class="card">
-                    <div class="item item-divider">
-                      <h2 class="title">Equipo</h2>
-                    </div>
-                    <div class="item item-divider">
-                      <img src="img/doctor" class="full-image">
-                    </div>
-                    <div class="item item-text-wrap">
-                      es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
-                    </div>
-                   </div></div>
-            
+          <form id="userLogin">
+        <div class="list col col-50 col-offset-25">
+          <img src="img/logo.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img">
+        </div>              
+        <div class="list" ng-controller="LoginCtrl">
+          <div class="col list form-item">
+            <label class="item ">
+              <input type="text" placeholder="Usuario" class="form-field" ng-model="data.username">
+            </label>                   
+          </div>
+          <div class="col list form-item">
+            <label class="item">
+              <input type="password" placeholder="Contraseña" class="form-field" ng-model="data.password">
+            </label>                    
+          </div> 
+            <a ui-sref="bienvenido">
+              <div>
+                <img src="img/iniciar-boton.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+              </div>
+            </a>
         </div>
+        <div class="list">
+          <div class="col text-center">
+            <h3 id="Notieneunacuenta">Olvido la contraseña ?</h3>
+            <a ui-sref="register" class="button button-clear button-assertive">
+              <h4 id="Notieneunacuenta">No es miembro ? Unase hoy</h4>
+            </a>   
+          </div>
+        </div>
+      </form>
 
       </ion-content>
-      
+      <div class="bar bar-footer">  
+        <div class="title">         
+          <h4 class="rosa">
+            www.combateobesidad.com            
+          </h4>                 
+        </div>
+      </div>
+
+
     </ion-view>

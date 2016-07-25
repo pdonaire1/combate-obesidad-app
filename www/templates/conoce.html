@@ -1,0 +1,44 @@
+<ion-view view-title="Conoce tu IMC"> 
+
+        <ion-content class="padding"> 
+             
+        <div class="list col col-50 col-offset-25">
+          <img src="img/logo.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img">
+        </div>              
+        <div class="list" ng-controller="LoginCtrl">
+          <div class="col list form-item">
+            <label class="item ">
+              <input type="text" placeholder="ingresa tu estatura en metros" class="form-field" ng-model="data.username">
+            </label>                   
+          </div>
+          <div class="col list form-item">
+            <label class="item">
+              <input type="text" placeholder="ingresa tu peso en kilogramos" class="form-field" ng-model="data.password">
+            </label>                    
+          </div> 
+          <ion-list>
+			  <ion-radio ng-model="choice" ng-value="'A'">Masculino</ion-radio>
+			  <ion-radio ng-model="choice" ng-value="'B'">Femenino</ion-radio>
+			</ion-list>
+          <a ui-sref="calcular">
+          	<div>
+ 			 	<img src="img/calcular.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+		 	</div>
+          </a>
+        </div>
+        <div class="list">
+          <div class="col text-center">
+            <h5 id="Notieneunacuenta">El indice de masa corporal(IMC) es el resultado de relacion entre tu peso y la estatura.</h5>              
+          </div>
+        </div>
+    
+                    
+      </ion-content>
+      <div class="bar bar-footer">  
+        <div class="title">         
+          <h4 class="rosa">
+            www.combateobesidad.com            
+          </h4>                 
+        </div>
+      </div>
+</ion-view>

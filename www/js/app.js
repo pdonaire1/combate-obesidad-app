@@ -23,88 +23,50 @@ angular.module('starter', ['ionic'])
   });
 })
 
-        .config(function($stateProvider,$urlRouterProvider){
+        .config(function($stateProvider,$urlRouterProvider, $ionicConfigProvider){
+          $ionicConfigProvider.tabs.position("bottom");
+          $ionicConfigProvider.navBar.alignTitle("center");
           $stateProvider
           .state('tab',{
               url: '/tab',
               abstract: true,
               templateUrl: 'templates/tab.html'
           })
-         .state('tab.home',{
+         .state('home',{
             url: '/home',
-            views: {
-                'tab-home': {
-                    templateUrl: 'templates/home.html'
-                }
-            }                      
+            templateUrl: 'templates/home.html'                         
          })
-         .state('tab.contacto',{
-            url: '/contacto',
-            views: {
-                'tab-contacto': {
-                    templateUrl: 'templates/contacto.html'
-                }
-            }                      
+         .state('bienvenido',{
+            url: '/bienvenido',              
+            templateUrl: 'templates/bienvenido.html'                                            
          })
-          .state('tab.info',{
-            url: '/info',
-            views: {
-                'tab-info': {
-                    templateUrl: 'templates/info.html'
-                }
-            }                      
-         }) .state('tab.galeria',{
-            url: '/galeria',
-            views: {
-                'tab-galeria': {
-                    templateUrl: 'templates/galeria.html'
-                }
-            }                      
-         }) .state('tab.cita',{
-            url: '/cita',
-            views: {
-                'tab-cita': {
-                    templateUrl: 'templates/cita.html'
-                }
-            }                      
-         }) 
-            .state('tab.login', {
-                url: '/login',
-                views: {
-                    'tab-login': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
-                    }
-                }             
-            }).state('tab.admin', {
-                url: '/admin',
-                views: {
-                    'tab-login': {
-                        templateUrl: 'templates/admin.html'
-                        
-                    }
-                }             
-            })
-            .state('tab.comunidad', {
-                url: '/comunidad',
-                views: {
-                    'tab-comunidad': {
-                        templateUrl: 'templates/comunidad.html',
-                        controller: 'ComunidadCtrl'
-                    }
-                }             
-            })
-            .state('tab.user', {
-                  url: '/user/:id',
-                  views: {
-                    'tab-user': {
-                      templateUrl: 'templates/user.html',
-                      controller: 'UserCtrl'
-                    }
-                  }
-                })
+          .state('tusPasos2',{
+            url: '/tusPasos2',        
+            templateUrl: 'templates/tusPasos2.html'                                 
+         })
+          .state('calcular',{
+            url: '/calcular',
+            templateUrl: 'templates/calcular.html'                                
+         })
 
- $urlRouterProvider.otherwise('/tab/home');     
+          .state('conoce',{
+            url: '/conoce',
+            templateUrl: 'templates/conoce.html'
+         })            
+          .state('tusPasos3', {
+                url: '/tusPasos3',             
+                templateUrl: 'templates/tusPasos3.html'                            
+            })
+            .state('tusPasos1', {
+                url: '/tusPasos1',            
+                templateUrl: 'templates/tusPasos1.html',                       
+            })
+            .state('tips', {
+                  url: '/tips/',
+                  templateUrl: 'templates/tips.html',
+            })
+
+          $urlRouterProvider.otherwise('/home');     
         })
 .controller('ComunidadCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
   $http.get('js/data.json')
