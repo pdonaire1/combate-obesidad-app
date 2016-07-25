@@ -68,11 +68,13 @@ angular.module('starter', ['ionic'])
 
           $urlRouterProvider.otherwise('/home');     
         })
-.controller('ComunidadCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
-  $http.get('js/data.json')
-  .success(function(data){
-    $scope.usuarios = data.usuarios;
-  });
+.controller('prueba', ['$scope', function($scope) {
+    console.log("prueba");
+    var sevilla = new google.maps.LatLng(37.377222, -5.986944);  
+var buenos_aires = new google.maps.LatLng(-34.608333, -58.371944);  
+var distancia = google.maps.geometry.spherical.computeDistanceBetween(sevilla, buenos_aires);
+
+
 }]) 
 
 .controller('UserCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
