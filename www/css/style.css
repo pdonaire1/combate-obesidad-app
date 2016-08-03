@@ -18,6 +18,21 @@ bode .view {
 .back-pink{
   background-color: #FC2B5C;
 }
+.pad{
+  margin-top: 6px;
+}
+
+.back-frutas{
+  background-color: #6495ED;
+}
+
+.back-with{
+  background-color: #ffffff;
+}
+.letras-blancas{
+  color: #ffffff;  
+}
+
 a:link{
   text-decoration: none;
  /* position: relative;
@@ -386,6 +401,7 @@ img.pequeña{
   behavior: url(PIE.htc);*/
 }
 
+
 .circle3{
   width: 150px;
   height: 150px;
@@ -401,8 +417,28 @@ img.pequeña{
   behavior: url(PIE.htc);*/
 }
 
+.circle2 {
+  width: 80px;
+  height: 80px;
+  border-radius: 80%;
+  background:#FF33CC  ;
+
+  /*align-content: center !important;
+  position: relative;
+  right: -14%;*/
+  /*-webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  behavior: url(PIE.htc);*/
+}
+
 img.peque{
   width: 100px; height: 100px;
+}
+
+img.mini{
+  margin-top: 10px;
+  width: 60px; height: 60px;
 }
 
 .grande{
@@ -420,3 +456,14 @@ img.peque{
 .claro{
 	color:#00FFFF;
 }
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 400px; 
+    height: 300px
+}
+
+.borde{
+  border-style: dashed; border-width: 1px;
+}
+

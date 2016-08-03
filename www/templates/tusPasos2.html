@@ -1,5 +1,5 @@
 <ion-view view-title="Tus pasos">       
-      <ion-content class="padding"> 
+      <ion-content class="padding" ng-controller="prueba"> 
       	<br>
       	<br>
          <div>
@@ -10,7 +10,7 @@
          <br>
          <br>
          <div class="row row-center">
-          <div class="col col-50 text-center ">
+          <div class="col col-50 text-center " ng-click="llegada()">
             <center>
              
                 <div class="back-blue circle col-center">
@@ -22,16 +22,16 @@
            
             </center>
           </div>
-          <div class="col col-50 text-center">
+          <div class="col col-50 text-center" ng-click="distancia()">
             <center>
-              <a ui-sref="tusPasos3">              
+                    
                 <div class="back-blue circle col-center">
                   <div class="circle2">
                     <img src="img/ok.png" width="40%" class="peque">
                   </div>
                 </div>
                 <span class="text-circle"><h3 class="rosa">Terminar</h3></span>
-              </a>
+             
             </center>
           </div>        
         </div>

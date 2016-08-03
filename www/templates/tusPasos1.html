@@ -1,7 +1,7 @@
   <ion-view view-title="Tus pasos">
     
 
-  <ion-content class="has-subheader">
+  <ion-content class="has-subheader" ng-controller="prueba">
     <div>
         <center>
         <h5 class="azul">¿Cuantos pasos diste hoy?.Recuerda que un estilo de vida saludable esta ligado a los beneficios de caminar, correr o trotar. Cuenta con nosotros cada paso a un estilo de vida saludable.</h5>
@@ -12,15 +12,15 @@
       
       <div>
         <center>
-          <a ui-sref="tusPasos2">
+         
           
-              <div class="circle3">
+              <div class="circle3" ng-click="ubicacion()">
                 <br>
                 <br>
                  <h2 class="blanca">Comenzar</h2>
 
               </div>
-          </a>
+       
         </center> 
     </div>
   </ion-content>  

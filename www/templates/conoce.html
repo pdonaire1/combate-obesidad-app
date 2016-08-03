@@ -1,6 +1,6 @@
 <ion-view view-title="Conoce tu IMC"> 
 
-        <ion-content class="padding"> 
+        <ion-content class="padding" ng-controller="IndiceCtrl"> 
              
         <div class="list col col-50 col-offset-25">
           <img src="img/logo.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img">
@@ -8,19 +8,19 @@
         <div class="list" ng-controller="LoginCtrl">
           <div class="col list form-item">
             <label class="item ">
-              <input type="text" placeholder="ingresa tu estatura en metros" class="form-field" ng-model="data.username">
+              <input type="text" placeholder="Estatura en metros" class="form-field" ng-model="estatura">
             </label>                   
           </div>
           <div class="col list form-item">
             <label class="item">
-              <input type="text" placeholder="ingresa tu peso en kilogramos" class="form-field" ng-model="data.password">
+              <input type="text" placeholder="Peso en kilogramos" class="form-field" ng-model="peso">
             </label>                    
           </div> 
           <ion-list>
 			  <ion-radio ng-model="choice" ng-value="'A'">Masculino</ion-radio>
 			  <ion-radio ng-model="choice" ng-value="'B'">Femenino</ion-radio>
 			</ion-list>
-          <a ui-sref="calcular">
+          <a ng-click="indice(estatura,peso)">
           	<div>
  			 	<img src="img/calcular.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
 		 	</div>

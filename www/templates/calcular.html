@@ -1,14 +1,14 @@
 <ion-view view-title="Conoce tu IMC"> 
       
 
-        <ion-content class="padding"> 
+        <ion-content class="padding" ng-controller="CalcularCtrl"> 
         	<br>
         	<br>
         	<br>
         	<div>
         		<center>
                  <h1 class="prueba">
-	             	29,1
+	             	{{calculo}}
 	              </h1>
 	              </center>
              </div>
@@ -75,7 +75,7 @@
              </div>
              <div class="range">
 			  
-			  <input type="range" name="volume">
+			  <input type="range" min="18" max="40" ng-model="calculo">
 			 
 			</div>
       </ion-content>

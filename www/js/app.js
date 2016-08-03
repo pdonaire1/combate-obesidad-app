@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('app')
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -40,12 +40,66 @@ angular.module('starter', ['ionic'])
             url: '/bienvenido',              
             templateUrl: 'templates/bienvenido.html'                                            
          })
+         .state('bienvenido2',{
+            url: '/bienvenido2',              
+            templateUrl: 'templates/bienvenido2.html'                                            
+         })
+         .state('nutricion',{
+            url: '/nutricion',              
+            templateUrl: 'templates/nutricion.html'                                            
+         })
+
+         .state('alimentacion',{
+            url: '/alimentacion',              
+            templateUrl: 'templates/alimentacion.html'                                            
+         })
+
+         .state('grafica',{
+            url: '/grafica',              
+            templateUrl: 'templates/grafica.html'                                            
+         })
+         
+         .state('grupos',{
+            url: '/grupos',              
+            templateUrl: 'templates/grupos.html'                                            
+         })
+
+         .state('frutas',{
+            url: '/frutas',              
+            templateUrl: 'templates/grupos/frutas.html'                                            
+         })
+
+         .state('verduras',{
+            url: '/verduras',              
+            templateUrl: 'templates/grupos/verduras.html'                                            
+         })
+
+          .state('cereales',{
+            url: '/cereales',              
+            templateUrl: 'templates/grupos/cereales.html'                                            
+         })
+           .state('animal',{
+            url: '/animal',              
+            templateUrl: 'templates/grupos/animal.html'                                            
+         })
+
+          .state('leche',{
+            url: '/leche',              
+            templateUrl: 'templates/grupos/leche.html'                                            
+         })
+
+          .state('grasas',{
+            url: '/grasas',              
+            templateUrl: 'templates/grupos/grasas.html'                                            
+         }) 
+
+          
           .state('tusPasos2',{
             url: '/tusPasos2',        
             templateUrl: 'templates/tusPasos2.html'                                 
          })
           .state('calcular',{
-            url: '/calcular',
+            url: '/calcular/{indice}',
             templateUrl: 'templates/calcular.html'                                
          })
 
@@ -68,16 +122,83 @@ angular.module('starter', ['ionic'])
 
           $urlRouterProvider.otherwise('/home');     
         })
-.controller('prueba', ['$scope', function($scope) {
-    console.log("prueba");
-    var sevilla = new google.maps.LatLng(37.377222, -5.986944);  
-var buenos_aires = new google.maps.LatLng(-34.608333, -58.371944);  
-var distancia = google.maps.geometry.spherical.computeDistanceBetween(sevilla, buenos_aires);
+angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading','$ionicPopup','$state','localStorageService', function($scope,$ionicLoading,$ionicPopup,$state,localStorageService) {
+    
+    var origen = {};
+    var destino = {}
+    var prueba= {};
+    $scope.ubicacion = function() {
+            
+            $ionicLoading.show({});
+
+            navigator.geolocation.getCurrentPosition(function(pos) {
+
+                
+                
+                  origen.lat= pos.coords.latitude;
+                  origen.lng= pos.coords.longitude;
+                  localStorageService.set('origen', origen);
+                  
+                  
+                  
+                $ionicLoading.hide();
+
+            }, function(error) {
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: 'Error de localización',
+                    template: error.message,
+                    okType: 'button-assertive'
+                });
+            })
+            
+            $state.go('tusPasos2');
+    }
+
+    $scope.llegada = function() {
+        $ionicLoading.show({});
+
+            navigator.geolocation.getCurrentPosition(function(pos) {
+
+                destino.lat = parseFloat(8.59518361387541);
+                destino.lng = parseFloat(-71.15875571966171);
+
+                localStorageService.set('destino', destino);
+
+                $ionicLoading.hide();
+
+            }, function(error) {
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: 'Error de localización',
+                    template: error.message,
+                    okType: 'button-assertive'
+                });
+            })
+            $scope.distancia();
+    }
 
 
+    $scope.distancia = function() {
+
+        var service  = new google.maps.DistanceMatrixService();
+
+        service.getDistanceMatrix({
+           origins:[localStorageService.get("origen")],
+            destinations:[localStorageService.get("destino")],
+           travelMode: google.maps.TravelMode.WALKING,    
+        }, callback);
+        function callback(response, status) {
+          
+            localStorageService.set('suma', response.rows[0].elements[0].distance.text);
+            console.log(localStorageService.get("suma"))
+          // See Parsing the Results for
+          // the basics of a callback function.
+        }
+    }
 }]) 
 
-.controller('UserCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+angular.module('app.Controllers').controller('UserCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
   $http.get('js/data.json')
   .success(function(data){
     $scope.data = data.usuarios[$state.params.id];
@@ -85,31 +206,74 @@ var distancia = google.maps.geometry.spherical.computeDistanceBetween(sevilla, b
 }])
 
         
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+angular.module('app.Controllers').controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
  
     $scope.login = function() {
         LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-            $state.go('tab.dash');
+            $state.go('bienvenido2');
         }).error(function(data) {
             var alertPopup = $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check your credentials!'
+                title: 'Usuario fallido!',
+                template: 'Por favor intente de nuevo!'
             });
         });
     }
 })
 
+angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ionicPopup, $state) {
+    $scope.estatura;
+    $scope.peso;
+    
+
+    $scope.indice = function(estatura,peso) {
+      
+      var indi = peso /estatura;
+      
+        
+        
+        $state.go('calcular',{ indice: indi});
+
+    }
+})
+
+angular.module('app.Controllers').controller('MyCtrl', function($scope) {
+     Morris.Bar({
+  element: 'bar-example',
+  data: [
+    { y: 'Frutas', a: 100, b: 90 },
+    { y: '2007', a: 75,  b: 65 },
+    { y: '2008', a: 50,  b: 40 },
+    { y: '2009', a: 75,  b: 65 },
+    { y: '2010', a: 50,  b: 40 },
+    { y: '2011', a: 75,  b: 65 },
+    { y: '2012', a: 100, b: 90 }
+  ],
+  xkey: 'y',
+  ykeys: ['a'],
+  labels: ['Series A', 'Series B']
+});
 
 
-.service('LoginService', function($q) {
+})
+
+
+
+
+angular.module('app.Controllers').controller('CalcularCtrl', function($stateParams,$scope, $ionicPopup, $state) {
+     valor2decimales=Math.round($stateParams.indice*100) / 100; 
+    $scope.calculo = valor2decimales;
+})
+
+
+angular.module('app.Services').service('LoginService', function($q) {
     return {
         loginUser: function(name, pw) {
             var deferred = $q.defer();
             var promise = deferred.promise;
  
             if (name == 'user' && pw == 'secret') {
-                location.href = '#/tab/admin';
+                location.href = '#/bienvenido2';
             } else {
                 deferred.reject('Wrong credentials.');
             }
@@ -124,4 +288,29 @@ var distancia = google.maps.geometry.spherical.computeDistanceBetween(sevilla, b
             return promise;
         }
     }
+})
+
+
+
+angular.module('app.Services').service('StorageService',  function($q) {
+
+function StorageService($localStorage) {
+  
+    var _getAll = function () {
+    return $localStorage;
+  };
+  var _add = function (thing) {
+    $localStorage.things.push(thing);
+  }
+  var _remove = function (thing) {
+    $localStorage.things.splice($localStorage.things.indexOf(thing), 1);
+  }
+  return {
+      getAll: _getAll,
+      add: _add,
+      remove: _remove
+    };
+  
+}
+
 })
