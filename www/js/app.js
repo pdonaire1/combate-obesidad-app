@@ -120,6 +120,42 @@ angular.module('app')
                   templateUrl: 'templates/tips.html',
             })
 
+        .state('psicologia', {
+            url: '/psicologia',
+            templateUrl: 'templates/psicologia/psicologia.html',
+          })
+
+         .state('dia1', {
+            url: '/dia1',
+            templateUrl: 'templates/psicologia/dia1.html',
+          })
+
+         .state('dia2', {
+            url: '/dia2',
+            templateUrl: 'templates/psicologia/dia2.html',
+          })
+
+         .state('dia3', {
+            url: '/dia3',
+            templateUrl: 'templates/psicologia/dia3.html',
+          })
+
+         .state('dia4', {
+            url: '/dia4',
+            templateUrl: 'templates/psicologia/dia4.html',
+          })
+
+         .state('dia5', {
+            url: '/dia5',
+            templateUrl: 'templates/psicologia/dia5.html',
+          })
+
+         .state('ejercicio', {
+            url: '/ejercicio',
+            templateUrl: 'templates/ejercicio/ejercicio.html',
+          })
+        
+
           $urlRouterProvider.otherwise('/home');     
         })
 angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading','$ionicPopup','$state','localStorageService', function($scope,$ionicLoading,$ionicPopup,$state,localStorageService) {
@@ -238,21 +274,10 @@ angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ion
 })
 
 angular.module('app.Controllers').controller('MyCtrl', function($scope) {
-     Morris.Bar({
-  element: 'bar-example',
-  data: [
-    { y: 'Frutas', a: 100, b: 90 },
-    { y: '2007', a: 75,  b: 65 },
-    { y: '2008', a: 50,  b: 40 },
-    { y: '2009', a: 75,  b: 65 },
-    { y: '2010', a: 50,  b: 40 },
-    { y: '2011', a: 75,  b: 65 },
-    { y: '2012', a: 100, b: 90 }
-  ],
-  xkey: 'y',
-  ykeys: ['a'],
-  labels: ['Series A', 'Series B']
-});
+    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+   $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+  $scope.data = [300, 500, 100];
+
 
 
 })

@@ -7,6 +7,7 @@
         , 'app.Directives'
         , 'ionic'
         , 'LocalStorageModule'
+        , 'chart.js'
    ]
 
     angular.module('app', dependencies);
