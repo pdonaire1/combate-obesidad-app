@@ -156,6 +156,112 @@ angular.module('app')
           })
         
 
+         .state('nivel1', {
+            url: '/nivel1',
+            templateUrl: 'templates/ejercicio/nivel1/nivel1.html',
+          })
+
+         .state('ciclos', {
+            url: '/ciclos',
+            templateUrl: 'templates/ejercicio/nivel1/ciclos.html',
+          })
+
+         .state('fin', {
+            url: '/fin',
+            templateUrl: 'templates/ejercicio/nivel1/fin.html',
+          })
+
+         .state('nivel2', {
+            url: '/nivel2',
+            templateUrl: 'templates/ejercicio/nivel2/nivel2.html',
+          })
+
+          .state('ciclos2', {
+            url: '/ciclos2',
+            templateUrl: 'templates/ejercicio/nivel2/ciclos2.html',
+          })
+
+          .state('sentadillas', {
+            url: '/sentadillas',
+            templateUrl: 'templates/ejercicio/nivel2/sentadillas.html',
+          })
+
+          .state('desplantes', {
+            url: '/desplantes',
+            templateUrl: 'templates/ejercicio/nivel2/desplantes.html',
+          })
+
+           .state('lagartijas', {
+            url: '/lagartijas',
+            templateUrl: 'templates/ejercicio/nivel2/lagartijas.html',
+          })
+
+            .state('fondo', {
+            url: '/fondo',
+            templateUrl: 'templates/ejercicio/nivel2/fondo.html',
+          })
+
+            .state('abdo', {
+            url: '/abdo',
+            templateUrl: 'templates/ejercicio/nivel2/abdo.html',
+          })
+
+              .state('reverencia', {
+            url: '/reverencia',
+            templateUrl: 'templates/ejercicio/nivel2/reverencia.html',
+          })
+
+          .state('fin2', {
+            url: '/fin2',
+            templateUrl: 'templates/ejercicio/nivel2/fin2.html',
+          })
+
+           .state('fin3', {
+            url: '/fin3',
+            templateUrl: 'templates/ejercicio/nivel3/fin3.html',
+          })
+
+            .state('ciclos3', {
+            url: '/ciclos3',
+            templateUrl: 'templates/ejercicio/nivel3/ciclos3.html',
+          })
+
+             .state('nivel3', {
+            url: '/nivel3',
+            templateUrl: 'templates/ejercicio/nivel3/nivel3.html',
+          })
+
+
+          .state('sentadillas2', {
+            url: '/sentadillas2',
+            templateUrl: 'templates/ejercicio/nivel3/sentadillas2.html',
+          })
+
+          .state('desplantes2', {
+            url: '/desplantes2',
+            templateUrl: 'templates/ejercicio/nivel3/desplantes2.html',
+          })
+
+           .state('lagartijas2', {
+            url: '/lagartijas2',
+            templateUrl: 'templates/ejercicio/nivel3/lagartijas2.html',
+          })
+
+            .state('fondo2', {
+            url: '/fondo2',
+            templateUrl: 'templates/ejercicio/nivel3/fondo2.html',
+          })
+
+            .state('abdo2', {
+            url: '/abdo2',
+            templateUrl: 'templates/ejercicio/nivel3/abdo2.html',
+          })
+
+              .state('reverencia2', {
+            url: '/reverencia2',
+            templateUrl: 'templates/ejercicio/nivel3/reverencia2.html',
+          })
+          
           $urlRouterProvider.otherwise('/home');     
         })
 angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading','$ionicPopup','$state','localStorageService', function($scope,$ionicLoading,$ionicPopup,$state,localStorageService) {
@@ -282,6 +388,98 @@ angular.module('app.Controllers').controller('MyCtrl', function($scope) {
 
 })
 
+angular.module('app.Controllers').controller('ciclos', function($scope,$timeout,$state) {
+   
+    $scope.counter = 0;
+    $scope.minutos = 0;
+    $scope.ciclos = 0;
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+
+        if($scope.counter==60){  
+            $scope.minutos++;
+            $scope.counter=0
+        }
+
+        if($scope.minutos==4){ 
+          $scope.minutos=0  
+          $scope.ciclos++
+        }
+        if($scope.ciclos==8){ 
+          stop();
+          $state.go('fin');
+        }
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+
+})
+
+angular.module('app.Controllers').controller('ciclos2', function($scope,$timeout,$state) {
+   
+    $scope.counter = 0;
+    $scope.minutos = 0;
+    $scope.ciclos = 0;
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+
+        if($scope.counter==60){  
+            $scope.minutos++;
+            $scope.counter=0
+        }
+
+        if($scope.minutos==5){ 
+          $scope.minutos=0  
+          $scope.ciclos++
+        }
+        if($scope.ciclos==9){ 
+          stop();
+          $state.go('fin2');
+        }
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+
+})
+
+angular.module('app.Controllers').controller('ciclos3', function($scope,$timeout,$state) {
+   
+    $scope.counter = 0;
+    $scope.minutos = 0;
+    $scope.ciclos = 0;
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+
+        if($scope.counter==60){  
+            $scope.minutos++;
+            $scope.counter=0
+        }
+
+        if($scope.minutos==10){ 
+          $scope.minutos=0  
+          $scope.ciclos++
+        }
+        if($scope.ciclos==6){ 
+          stop();
+          $state.go('fin3');
+        }
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+
+})
 
 
 
