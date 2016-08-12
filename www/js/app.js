@@ -624,25 +624,11 @@ function StorageService($localStorage) {
 
 
 angular.module('app.Controllers').controller('getController', function($scope,$ionicLoading,$ionicPopup,psicologiaService,localStorageService,$state) {
-   $ionicLoading.show({});
+   
    var access_token = localStorageService.get("access_token"); 
    $scope.datos = {};
-    $scope.enviar = onEnviar;
-      psicologiaService.get(access_token).success(function(data) {
-              $ionicLoading.hide();
-              $scope.datos.motivo = data.motivo;
-              $scope.datos.ventaja = data.ventaja;
-              $scope.datos.recordatorio = data.ventaja;
-                localStorageService.set('motivo', data.motivo)
-                localStorageService.set('ventaja', data.ventaja)
-                localStorageService.set('recordatorio', data.recordatorio)
-            }).error(function(data) {
-             
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Error al enviar!',
-                    template: 'Por favor verifica tu red!'
-                });
-            });
+   $scope.enviar = onEnviar;
+    
 
       function onEnviar(params){
       localStorageService.set('motivo', $scope.datos.motivo),

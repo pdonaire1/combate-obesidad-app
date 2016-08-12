@@ -9,7 +9,7 @@ psicologiaService.$inject = ['$http', '$q', 'constants']
 function psicologiaService($http, $q,constants) {
     var self = this;
     self.send = onSend;
-    self.get = onGet;
+    self.obtener = onObtener;
     
 
 
@@ -41,7 +41,7 @@ function psicologiaService($http, $q,constants) {
         return promise;
     }
 
-    function onGet(token){
+    function onObtener(token){
         var deferred = $q.defer();
             var deferred = $q.defer();
             var promise = deferred.promise;
