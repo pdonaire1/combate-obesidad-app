@@ -9,6 +9,7 @@ psicologiaService.$inject = ['$http', '$q', 'constants']
 function psicologiaService($http, $q,constants) {
     var self = this;
     self.send = onSend;
+    self.get = onGet;
     
 
 
@@ -40,16 +41,13 @@ function psicologiaService($http, $q,constants) {
         return promise;
     }
 
-  /*
-
-
-     function onSGet2(token){
+    function onGet(token){
         var deferred = $q.defer();
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var url= constants.psi.get2();
+            var url= constants.psicologia.get();
 
-            $http.get(url+token)
+            $http.get(url+"?access_token="+token)
               .success(function(data) {
                 if(data) {
                   deferred.resolve(data);
@@ -70,7 +68,7 @@ function psicologiaService($http, $q,constants) {
             }
         return promise;
     }
-  */
+
 }
 
 })()

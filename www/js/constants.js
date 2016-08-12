@@ -45,6 +45,17 @@ function constantsService() {
         return url;
     };
 
+    self.psicologia.send = function () {
+        var url = URL_BASE + 'psicologia/create';
+        return url;
+    };
+
+     self.psicologia.get = function () {
+        var url = URL_BASE + 'psicologia/getrest';
+
+        return url;
+    };
+
 
     
     

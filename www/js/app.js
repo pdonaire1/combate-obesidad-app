@@ -370,20 +370,36 @@ angular.module('app.Controllers').controller('UserCtrl', ['$scope', '$http', '$s
 }])
 
         
-angular.module('app.Controllers').controller('LoginCtrl', function($scope, loginService, $ionicPopup, $state,localStorageService) {
+angular.module('app.Controllers').controller('LoginCtrl', function($scope, loginService, $ionicPopup,$ionicLoading, $state,localStorageService) {
     $scope.data = {};
- 
+    
     $scope.login = function() {
+        $ionicLoading.show({});
         loginService.token($scope.data.username, $scope.data.password).success(function(data) {
-            localStorageService.set('access_token', data.access_token);
-            if(data.type==1){
-               $state.go('bienvenido2');
+            if(data=="El usuario solicitado no existe"){
+                $ionicLoading.hide();
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error al entrar!',
+                    template: 'El usuario solicitado no existe'
+                });
             }
             else{
-              $state.go('bienvenido');
+              $ionicLoading.hide();
+              localStorageService.set('access_token', data.access_token);
+              console.log(data)
+              if(data.type==2){
+                 $state.go('bienvenido2');
+              }
+              else{
+                $state.go('bienvenido');
+              }
             }
         }).error(function(data) {
-           
+             $ionicLoading.hide();
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error al entrar!',
+                    template: 'Por favor verifica tus credenciales!'
+                });
         });
     }
 })
@@ -430,6 +446,7 @@ angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ion
 angular.module('app.Controllers').controller('comidaController', 
   function($scope, $http, localStorageService, comidaService, $ionicPopup, $state) {
     var access_token = localStorageService.get("access_token");
+    console.log(access_token);
     $scope.data = {};
     $scope.data.frutas=[];
     $scope.data.frutas[0]=0;
@@ -526,25 +543,30 @@ angular.module('app.Controllers').controller('comidaController',
     
 })
 
-angular.module('app.Controllers').controller('graficaCtrl', function($scope,localStorageService) {
+angular.module('app.Controllers').controller('graficaCtrl', function($scope,localStorageService,graficaService) {
   var access_token = localStorageService.get("access_token");
 
-  graficaService.send(parametros).success(function(data) {
-        
+  graficaService.send(access_token).success(function(data) {
+
+     $scope.labels = ['frutas', 'verduras', 'cereales', 'animales', 'leches', 'leguminosas', 'grasas'];
+ 
+      $scope.datos = [
+        [data.frutas,
+         data.verduras,
+         data.cereales,
+         data.animales,
+         data.leches,
+         data.leguminosas,
+         data.grasas
+        ]  
+      ];  
+      console.log(data)  
 
 
 
   }).error(function(data) {
      
   });
-
-  $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
- 
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40]
-    
-  ];
-
 
 })
 
@@ -677,28 +699,46 @@ function StorageService($localStorage) {
 
 
 
-
-
-
-
-
-angular.module('app.Controllers').controller('psiController', function($scope,$ionicPopup,psicologiaService,localStorageService,$state) {
+angular.module('app.Controllers').controller('getController', function($scope,$ionicLoading,$ionicPopup,psicologiaService,localStorageService,$state) {
+   $ionicLoading.show({});
+   var access_token = localStorageService.get("access_token"); 
    $scope.datos = {};
-   $scope.enviar = onEnviar;
-   $scope.enviar2 = onEnviar2;
+    $scope.enviar = onEnviar;
+      psicologiaService.get(access_token).success(function(data) {
+              $ionicLoading.hide();
+              $scope.datos.motivo = data.motivo;
+              $scope.datos.ventaja = data.ventaja;
+              $scope.datos.recordatorio = data.ventaja;
+                localStorageService.set('motivo', data.motivo)
+                localStorageService.set('ventaja', data.ventaja)
+                localStorageService.set('recordatorio', data.recordatorio)
+            }).error(function(data) {
+             
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error al enviar!',
+                    template: 'Por favor verifica tu red!'
+                });
+            });
 
-  function onEnviar(params){
+      function onEnviar(params){
       localStorageService.set('motivo', $scope.datos.motivo),
       localStorageService.set('ventaja', $scope.datos.ventaja)
-      $state.go('dia2');
+      $state.go('dia2');      
   }
+        
+})  
 
 
 
 
+angular.module('app.Controllers').controller('psiController', function($scope,$ionicLoading,$ionicPopup,psicologiaService,localStorageService,$state) {
+   $scope.datos = {};
    
-   function onEnviar2(params){
+   $scope.enviar2 = onEnviar2;
 
+
+   function onEnviar2(params){
+      $ionicLoading.show({});
           var params = {
         "access_token": localStorageService.get("access_token"),
         "motivo" :  localStorageService.get("motivo"),
@@ -707,13 +747,12 @@ angular.module('app.Controllers').controller('psiController', function($scope,$i
        }
       console.log(params)
       psicologiaService.send(params).success(function(data) {
-                if(data.validacion == 'ok')
-                   {   
-                  
-
-                         var alertPopup = $ionicPopup.alert({
+          $ionicLoading.hide();
+                if(data.success == true)
+                   {                     
+                        var alertPopup = $ionicPopup.alert({
                         title: 'Perfecto!',
-                        template: data.mensaje + 'Datos enviados con exito!'
+                        template: 'Datos enviados con exito!'
                     });
                       $state.go('dia4');
                    }
