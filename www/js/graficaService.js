@@ -2,11 +2,11 @@
     'use strict';
 angular.module('app.Services')
 
-.service('psicologiaService', psicologiaService);
+.service('graficaService', graficaService);
 
-psicologiaService.$inject = ['$http', '$q', 'constants']
+graficaService.$inject = ['$http', '$q', 'constants']
 
-function psicologiaService($http, $q,constants) {
+function graficaService($http, $q,constants) {
     var self = this;
     self.send = onSend;
     
@@ -16,9 +16,9 @@ function psicologiaService($http, $q,constants) {
         var deferred = $q.defer();
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var url= constants.psicologia.send();
+            var url= constants.grafica.send();
 
-            $http.post(url,params)
+            $http.get(url+"?access_token="+params)
               .success(function(data) {
                 if(data) {
                   deferred.resolve(data);

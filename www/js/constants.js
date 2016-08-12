@@ -41,7 +41,17 @@ function constantsService() {
     };
 
     self.comidas.send = function () {
-        var url = URL_BASE + 'consumption/consumo';
+        var url = URL_BASE + 'consumption/create';
+        return url;
+    };
+
+    self.psicologia.send = function () {
+        var url = URL_BASE + 'psicologia/create';
+        return url;
+    };
+
+     self.psicologia.get = function () {
+        var url = URL_BASE + 'psicologia/getrest';
         return url;
     };
 
