@@ -3,7 +3,7 @@
       <button class="button button-icon button-clear ion-ios-close-empty" ui-sref="bienvenido">
         </button>
     </ion-nav-buttons>
-    <ion-content class="padding" ng-controller="prueba"> 
+    <ion-content class="padding" ng-controller="pasosController"> 
         <div>
         <center>
         <h2 class="azul">!Felicidades</h2>
@@ -13,7 +13,7 @@
         <div>
             <center>
                 <span>
-                    <h1 class="mediana rosa">32</h1>
+                    <h1 class="mediana">{{pasos | number:0}}</h1>
                     <h1 class="chica claro">Pasos</h1>
                 </span>
                 
@@ -27,16 +27,28 @@
         </div>
          <div class="row">
           <div class="form-item list col-25">
-            <img src="img/face.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://www.facebook.com/combateobesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+              <img src="img/face.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
           </div>
           <div class="form-item list col-25">
-            <img src="img/twitter.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://twitter.com/combateobesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+              <img src="img/twitter.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
           </div>
           <div class="form-item list col-25">
-            <img src="img/in.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://www.linkedin.com/company/cruzada-nacional-contra-el-sobrepeso-y-la-obesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+              <img src="img/in.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
           </div>
           <div class="form-item list col-25">
-            <img src="img/pint.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+              <a ng-href="https://es.pinterest.com/combateobesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+                <img src="img/pint.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
           </div>              
         </div>
             

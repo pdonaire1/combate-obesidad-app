@@ -274,7 +274,10 @@ angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading'
     var origen = {};
     var destino = {}
     var prueba= {};
+    $scope.pasos = 0;
+    $scope.comprobar = false;
     $scope.ubicacion = function() {
+      localStorageService.set('suma', 0);
             
             $ionicLoading.show({});
 
@@ -307,8 +310,8 @@ angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading'
 
             navigator.geolocation.getCurrentPosition(function(pos) {
 
-                destino.lat = parseFloat(8.59518361387541);
-                destino.lng = parseFloat(-71.15875571966171);
+                destino.lat = pos.coords.latitude;
+                destino.lng = pos.coords.longitude;
 
                 localStorageService.set('destino', destino);
 
@@ -323,6 +326,7 @@ angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading'
                 });
             })
             $scope.distancia();
+            $scope.comprobar=true;
     }
 
 
@@ -336,14 +340,27 @@ angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading'
            travelMode: google.maps.TravelMode.WALKING,    
         }, callback);
         function callback(response, status) {
-          
-            localStorageService.set('suma', response.rows[0].elements[0].distance.text);
-            console.log(localStorageService.get("suma"))
+             
+            localStorageService.set('suma', response.rows[0].elements[0].distance.value);
+            $scope.pasos = localStorageService.get("suma")/1.5;
+            console.log($scope.pasos)
           // See Parsing the Results for
           // the basics of a callback function.
         }
     }
+
+    $scope.mostrar = function() {
+        if($scope.comprobar==false)
+          $scope.llegada();        
+        $state.go('tusPasos3');
+    }
+
 }]) 
+angular.module('app.Controllers').controller('pasosController', function($scope, loginService, $ionicPopup, $state,localStorageService) {
+
+  $scope.pasos= localStorageService.get("suma")/1.5;
+
+})
 
 angular.module('app.Controllers').controller('UserCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
   $http.get('js/data.json')
