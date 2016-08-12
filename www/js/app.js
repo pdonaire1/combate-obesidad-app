@@ -36,6 +36,11 @@ angular.module('app')
             url: '/home',
             templateUrl: 'templates/home.html'                         
          })
+
+         .state('register',{
+            url: '/register',
+            templateUrl: 'templates/register.html'                         
+         })
          .state('bienvenido',{
             url: '/bienvenido',              
             templateUrl: 'templates/bienvenido.html'                                            
@@ -116,7 +121,7 @@ angular.module('app')
                 templateUrl: 'templates/tusPasos1.html',                       
             })
             .state('tips', {
-                  url: '/tips/',
+                  url: '/tips',
                   templateUrl: 'templates/tips.html',
             })
 
@@ -348,17 +353,43 @@ angular.module('app.Controllers').controller('UserCtrl', ['$scope', '$http', '$s
 }])
 
         
-angular.module('app.Controllers').controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+angular.module('app.Controllers').controller('LoginCtrl', function($scope, loginService, $ionicPopup, $state,localStorageService) {
     $scope.data = {};
  
     $scope.login = function() {
-        LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-            $state.go('bienvenido2');
+        loginService.token($scope.data.username, $scope.data.password).success(function(data) {
+            localStorageService.set('access_token', data.access_token);
+            if(data.type==1){
+               $state.go('bienvenido2');
+            }
+            else{
+              $state.go('bienvenido');
+            }
         }).error(function(data) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Usuario fallido!',
-                template: 'Por favor intente de nuevo!'
-            });
+           
+        });
+    }
+})
+
+angular.module('app.Controllers').controller('RegisterCtrl', function($scope, registerService, $ionicPopup, $state) {
+    $scope.data = {};
+    
+    $scope.register = function() {
+
+     
+
+      var parametros = {
+        "firstName": $scope.data.name,
+        "lastName": $scope.data.apellido,
+        "username": $scope.data.user,
+        "password": $scope.data.password,
+        "type": $scope.data.type,
+        "email": $scope.data.email,
+      }
+        registerService.register(parametros).success(function(data) {
+            $state.go('home');
+        }).error(function(data) {
+           
         });
     }
 })
@@ -370,7 +401,7 @@ angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ion
 
     $scope.indice = function(estatura,peso) {
       
-      var indi = peso /estatura;
+      var indi = peso /(estatura*estatura);
       
         
         
@@ -379,11 +410,48 @@ angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ion
     }
 })
 
-angular.module('app.Controllers').controller('MyCtrl', function($scope) {
-    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-   $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 500, 100];
+angular.module('app.Controllers').controller('comidaController', function($scope,localStorageService, registerService, $ionicPopup, $state) {
+    var access_token = localStorageService.get("access_token");
+    $scope.data = {};
+    
+    $scope.send = function() {
 
+     
+
+      var parametros = {
+        "firstName": $scope.data.name,
+        "lastName": $scope.data.apellido,
+        "username": $scope.data.user,
+        "password": $scope.data.password,
+        "type": $scope.data.type,
+        "email": $scope.data.email,
+      }
+        registerService.register(parametros).success(function(data) {
+            $state.go('home');
+        }).error(function(data) {
+           
+        });
+    }
+})
+
+angular.module('app.Controllers').controller('graficaCtrl', function($scope,localStorageService) {
+  var access_token = localStorageService.get("access_token");
+
+  graficaService.send(parametros).success(function(data) {
+        
+
+
+
+  }).error(function(data) {
+     
+  });
+
+  $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+ 
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40]
+    
+  ];
 
 
 })
@@ -489,29 +557,6 @@ angular.module('app.Controllers').controller('CalcularCtrl', function($statePara
 })
 
 
-angular.module('app.Services').service('LoginService', function($q) {
-    return {
-        loginUser: function(name, pw) {
-            var deferred = $q.defer();
-            var promise = deferred.promise;
- 
-            if (name == 'user' && pw == 'secret') {
-                location.href = '#/bienvenido2';
-            } else {
-                deferred.reject('Wrong credentials.');
-            }
-            promise.success = function(fn) {
-                promise.then(fn);
-                return promise;
-            }
-            promise.error = function(fn) {
-                promise.then(null, fn);
-                return promise;
-            }
-            return promise;
-        }
-    }
-})
 
 
 
@@ -537,3 +582,138 @@ function StorageService($localStorage) {
 }
 
 })
+
+
+
+
+
+
+
+
+angular.module('app.Controllers').controller('psiController', function($scope,$ionicPopup,psicologiaService,localStorageService,$state) {
+   $scope.datos = {};
+   $scope.enviar = onEnviar;
+   $scope.enviar2 = onEnviar2;
+
+  function onEnviar(params){
+      localStorageService.set('motivo', $scope.datos.motivo),
+      localStorageService.set('ventaja', $scope.datos.ventaja)
+      $state.go('dia2');
+  }
+
+
+
+
+   
+   function onEnviar2(params){
+
+          var params = {
+        "access_token": localStorageService.get("access_token"),
+        "motivo" :  localStorageService.get("motivo"),
+        "ventaja" :  localStorageService.get("ventaja"), 
+        "recordatorio" :  $scope.datos.recordatorio
+       }
+      console.log(params)
+      psicologiaService.send(params).success(function(data) {
+                if(data.validacion == 'ok')
+                   {   
+                  
+
+                         var alertPopup = $ionicPopup.alert({
+                        title: 'Perfecto!',
+                        template: data.mensaje + 'Datos enviados con exito!'
+                    });
+                      $state.go('dia4');
+                   }
+                else{
+                
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Error al entrar!',
+                        template: data.mensaje + '!'
+                    });
+                }
+            }).error(function(data) {
+             
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error al enviar!',
+                    template: 'Por favor verifica tu red!'
+                });
+            });
+        }
+})  
+
+
+
+angular.module('app.Controllers').controller('ejercicioController', function($scope,$ionicPopup,ejercicioService,localStorageService,$state) {
+   var access_token = localStorageService.get("access_token");    
+   $scope.datos = {};
+   $scope.enviar = onEnviar
+   $scope.carita = onCarita;
+
+
+    function onCarita(params){
+      if(params==1){
+       $scope.datos.como_te_sientes="bien"
+         var alertPopup = $ionicPopup.alert({
+              title: 'Perfecto escogio!',
+              template: $scope.datos.como_te_sientes
+          });
+      }
+      if(params==2){
+       $scope.datos.como_te_sientes="regular"
+       var alertPopup = $ionicPopup.alert({
+              title: 'Perfecto escogio!',
+              template: $scope.datos.como_te_sientes
+          });
+      }
+      if(params==3){
+       $scope.datos.como_te_sientes="mal"
+       var alertPopup = $ionicPopup.alert({
+              title: 'Perfecto escogio!',
+              template: $scope.datos.como_te_sientes
+          });
+      }
+   }
+
+ 
+   
+   function onEnviar(){
+     
+      var params = {
+        "access_token": localStorageService.get("access_token"),
+        "como_te_sientes" :  $scope.datos.como_te_sientes,
+        "por_que_no": $scope.datos.por_que_no,
+        "hecho": $scope.datos.hecho,
+        "otra_actividad": $scope.datos.otra_actividad,
+        "otra_actividad_minutos": $scope.datos.otra_actividad_minutos
+
+   }
+
+      console.log(params)
+      ejercicioService.send1(params).success(function(data) {
+                if(data.validacion == 'ok')
+                   {   
+                  
+
+                         var alertPopup = $ionicPopup.alert({
+                        title: 'Perfecto!',
+                        template: data.mensaje + 'Datos enviados con exito!'
+                    });
+                         $state.go('dia3');
+                   }
+                else{
+                
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Error al entrar!',
+                        template: data.mensaje + '!'
+                    });
+                }
+            }).error(function(data) {
+             
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error al enviar!',
+                    template: 'Por favor verifica tu red!'
+                });
+            });
+        }
+})  

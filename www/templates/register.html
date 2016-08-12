@@ -1,9 +1,9 @@
-<ion-view view-title="Iniciar Sesión" > 
+<ion-view view-title="Registro" > 
 <ion-header-bar >      
       </ion-header-bar>
       
 
-        <ion-content ng-controller="LoginCtrl"> 
+        <ion-content ng-controller="RegisterCtrl"> 
           <form id="userLogin">
         <div class="list col col-50 col-offset-25">
           <img src="img/logo.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img">
@@ -11,30 +11,43 @@
         <div class="list">
           <div class="col list form-item">
             <label class="item ">
-              <input type="text" placeholder="Usuario" class="form-field" ng-model="data.username">
+              <input type="text" placeholder="Nombre" class="form-field" ng-model="data.name">
             </label>                   
+          </div>
+          <div class="col list form-item">
+            <label class="item">
+              <input type="text" placeholder="Apellido" class="form-field" ng-model="data.apellido">
+            </label>                    
+          </div>
+          <div class="col list form-item">
+            <label class="item">
+              <input type="text" placeholder="Usuario" class="form-field" ng-model="data.user">
+            </label>                    
+          </div>
+          <div class="col list form-item">
+            <label class="item">
+              <input type="text" placeholder="Email" class="form-field" ng-model="data.email">
+            </label>                    
           </div>
           <div class="col list form-item">
             <label class="item">
               <input type="password" placeholder="Contraseña" class="form-field" ng-model="data.password">
             </label>                    
-          </div> 
-            <a ng-click="login()">
+          </div>
+          <ion-list>
+            <ion-radio ng-model="data.type" ng-value="'1'" >Hospital</ion-radio>
+            <ion-radio ng-model="data.type" ng-value="'2'">cruzada</ion-radio>
+          </ion-list> 
+            <a ng-click="register()">
               <div>
                 <img src="img/iniciar-boton.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
               </div>
             </a>
         </div>
-        <div class="list">
-          <div class="col text-center">
-            <h3 id="Notieneunacuenta">Olvido la contraseña ?</h3>
-            <a ui-sref="register" class="button button-clear button-assertive">
-              <h4 id="Notieneunacuenta">No es miembro ? Unase hoy</h4>
-            </a>   
-          </div>
-        </div>
       </form>
-
+      <br>
+      <br>
+      <br>
       </ion-content>
       <div class="bar bar-footer">  
     <div class="title">         

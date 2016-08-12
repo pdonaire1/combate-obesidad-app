@@ -1,5 +1,8 @@
 <ion-view view-title="Conoce tu IMC"> 
-      
+      <ion-nav-buttons side="primary">
+      <button class="button button-icon button-clear ion-ios-close-empty" ui-sref="bienvenido">
+        </button>
+    </ion-nav-buttons>
 
         <ion-content class="padding" ng-controller="CalcularCtrl"> 
         	<br>
@@ -80,10 +83,13 @@
 			</div>
       </ion-content>
       <div class="bar bar-footer">  
-        <div class="title">         
-          <h4 class="rosa">
-            www.combateobesidad.com            
-          </h4>                 
-        </div>
-      </div>
+    <div class="title">         
+      <h4 class="rosa">
+        <a ng-href="http://www.combateobesidad.com"
+          onclick='window.open(this.href, "_system", "location=yes"); return false;'>  
+            www.combateobesidad.com    
+        </a>        
+      </h4>                 
+    </div>
+  </div>
 </ion-view>

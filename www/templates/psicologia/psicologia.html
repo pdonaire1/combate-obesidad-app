@@ -1,9 +1,12 @@
 <ion-view view-title="Psicología"> 
-      
+      <ion-nav-buttons side="primary">
+      <button class="button button-icon button-clear ion-ios-close-empty" ui-sref="bienvenido2">
+        </button>
+    </ion-nav-buttons> 
 
         <ion-content class="padding">            
           <div class=" col-center">          
-              <img src="img/psicologia/3/texto.png" width="100%" height="100%">          
+              <img src="img/psicologia/3/texto.png" class="img-responsive img-rounded row logo-img" width="100" >          
           </div>     
           <br>
           <br>     
@@ -12,7 +15,7 @@
             <center>
               <a ui-sref="dia1">
                 <div class=" col-center">           
-                    <img src="img/psicologia/3/dia1.png" width="100%" height="100%">             
+                    <img src="img/psicologia/3/dia1.png" class="img-responsive img-rounded row logo-img" width="100">             
                 </div>             
               </a>
             </center>
@@ -21,7 +24,7 @@
             <center>
               <a ui-sref="dia2">
                 <div class=" col-center">               
-                    <img src="img/psicologia/3/dia2.png" width="100%" height="100%">                 
+                    <img src="img/psicologia/3/dia2.png" class="img-responsive img-rounded row logo-img" width="100">                 
                 </div>               
               </a>
             </center>
@@ -30,7 +33,7 @@
             <center>
               <a ui-sref="dia3">
                 <div class=" col-center">                
-                    <img src="img/psicologia/3/dia3.png" width="100%" height="100%">                
+                    <img src="img/psicologia/3/dia3.png" class="img-responsive img-rounded row logo-img" width="100" >                
                 </div>             
               </a>
             </center>
@@ -43,7 +46,7 @@
             <center>
               <a ui-sref="dia4">
                 <div class=" col-center">               
-                    <img src="img/psicologia/3/4dia.png" width="70%" height="70%">              
+                    <img src="img/psicologia/3/4dia.png" class="img-responsive img-rounded row logo-img" width="100">              
                 </div>           
               </a>
             </center>
@@ -52,7 +55,7 @@
             <center>
               <a ui-sref="dia5">
                 <div class=" col-center">                  
-                    <img src="img/psicologia/3/5dia.png" width="70%" height="70%">                  
+                    <img src="img/psicologia/3/5dia.png" class="img-responsive img-rounded row logo-img" width="100">                  
                 </div>             
               </a>
             </center>
@@ -60,10 +63,13 @@
         </div>                   
       </ion-content>
        <div class="bar bar-footer">  
-        <div class="title">         
-          <h4 class="rosa">
-            www.himfg.edo.mx            
-          </h4>                 
-        </div>
-      </div>
+    <div class="title">         
+      <h4 class="rosa">
+        <a ng-href="http://www.himfg.edo.mx"
+          onclick='window.open(this.href, "_system", "location=yes"); return false;'>  
+            www.himfg.edo.mx     
+        </a>        
+      </h4>                 
+    </div>
+  </div>
 </ion-view>

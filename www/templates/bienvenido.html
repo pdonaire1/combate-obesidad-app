@@ -1,5 +1,8 @@
 <ion-view view-title="bienvenido"> 
-      
+       <ion-nav-buttons side="primary">
+      <button class="button button-icon button-clear ion-ios-close-empty" ui-sref="home">
+        </button>
+    </ion-nav-buttons>
 
         <ion-content class="padding"> 
            
@@ -25,16 +28,28 @@
         </div>
         <div class="row">
          	<div class="form-item list col-25">
-         		<img src="img/face.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://www.facebook.com/combateobesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+         		 <img src="img/face.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
          	</div>
          	<div class="form-item list col-25">
-         		<img src="img/twitter.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://twitter.com/combateobesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+         		 <img src="img/twitter.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
          	</div>
          	<div class="form-item list col-25">
-         		<img src="img/in.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://www.linkedin.com/company/cruzada-nacional-contra-el-sobrepeso-y-la-obesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+         		  <img src="img/in.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
          	</div>
          	<div class="form-item list col-25">
-         		<img src="img/pint.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            <a ng-href="https://es.pinterest.com/combateobesidad"
+            onclick='window.open(this.href, "_system", "location=yes"); return false;'>
+         		  <img src="img/pint.png" alt="Mi Cargapp" class="img-responsive img-rounded row logo-img" width="100">
+            </a>
          	</div>             	
         </div>
       
@@ -42,10 +57,13 @@
                     
       </ion-content>
        <div class="bar bar-footer">  
-        <div class="title">         
-          <h4 class="rosa">
-            www.combateobesidad.com            
-          </h4>                 
-        </div>
-      </div>
+    <div class="title">         
+      <h4 class="rosa">
+        <a ng-href="http://www.combateobesidad.com"
+          onclick='window.open(this.href, "_system", "location=yes"); return false;'>  
+            www.combateobesidad.com    
+        </a>        
+      </h4>                 
+    </div>
+  </div>
 </ion-view>

@@ -4,7 +4,7 @@
         </button>
     </ion-nav-buttons>
 
-        <ion-content class="padding" ng-controller="MyCtrl">            
+        <ion-content class="padding" ng-controller="graficaCtrl">            
           <div>
             <center>
               <h5 class="azul">Esta es tu grafica de consumo de alimentos por grupo.</h5>
@@ -12,18 +12,22 @@
           </div>     
           <br>
           <br> 
-
+          <br>
+          <br>
           
-           <canvas id="pie" class="chart chart-pie"
-            chart-data="data" chart-labels="labels" chart-options="options">
-          </canvas> 
+           <canvas id="bar" class="chart chart-bar"
+              chart-data="data" chart-labels="labels"> chart-series="series"
+            </canvas
                    
       </ion-content>
        <div class="bar bar-footer">  
-        <div class="title">         
-          <h4 class="rosa">
-            www.himfg.edo.mx            
-          </h4>                 
-        </div>
-      </div>
+    <div class="title">         
+      <h4 class="rosa">
+        <a ng-href="http://www.himfg.edo.mx"
+          onclick='window.open(this.href, "_system", "location=yes"); return false;'>  
+            www.himfg.edo.mx     
+        </a>        
+      </h4>                 
+    </div>
+  </div>
 </ion-view>

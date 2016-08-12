@@ -1,27 +1,33 @@
 <ion-view view-title="Psicología"> 
-      
+      <ion-nav-buttons side="primary">
+      <button class="button button-icon button-clear ion-ios-close-empty" ui-sref="bienvenido2">
+        </button>
+    </ion-nav-buttons> 
 
-        <ion-content class="padding">            
+        <ion-content class="padding" ng-controller="psiController">            
            <div class=" col-center">          
               <img src="img/psicologia/6/texto.png" width="100%" height="100%">          
           </div>    
           
           <div class="col list form-item">
             <label class="item ">
-              <input type="text" placeholder="Ventaja" class="form-field" ng-model="data.recordatorio">
+              <input type="text" placeholder="Recordatorio" class="form-field" ng-model="datos.recordatorio">
             </label>                   
           </div>
-          <div ui-sref="dia4" class=" col-center">
+          <div ng-click="enviar2()" class=" col-center">
             <center>          
               <img src="img/psicologia/4/terminarboton.png" width="20%" height="20%">          
             </center>
           </div>                    
       </ion-content>
        <div class="bar bar-footer">  
-        <div class="title">         
-          <h4 class="rosa">
-            www.himfg.edo.mx            
-          </h4>                 
-        </div>
-      </div>
+    <div class="title">         
+      <h4 class="rosa">
+        <a ng-href="http://www.himfg.edo.mx"
+          onclick='window.open(this.href, "_system", "location=yes"); return false;'>  
+            www.himfg.edo.mx     
+        </a>        
+      </h4>                 
+    </div>
+  </div>
 </ion-view>

@@ -1,8 +1,8 @@
 <ion-view view-title="Actividad Física"> 
       
 
-        <ion-content class="padding">   
-          <div ui-sref="ejercicio" class=" col-center">   
+        <ion-content class="padding" ng-controller="ejercicioController">   
+          <div ng-click="enviar()" class=" col-center">   
           <center>       
               <img src="img/ejercicio/nivel1/imagenes/finalizado.png" width="30%" height="30%">
               </center>      
@@ -20,22 +20,29 @@
           <br>
             <div class="row borde" >
                 <div class="col col-50">
-                  <label class="checkbox-inline">
+                  <label class="radio-inline">
                     Lo realizaste ?
-                    <input type="checkbox" id="inlineCheckbox1" value="option1">
+                    <input type="radio" id="inlineRadioOptions" value="1"
+                    ng-model="datos.hecho">
                      Si
                   </label>
                 </div>
                 <div class="col col-50 ">
-                   <label class="checkbox-inline">
-                      No Por Qué ? <br>
-                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                   <label  class="radio-inline">
+                   <input type="radio" id="inlineRadioOptions" value="0" ng-model="datos.hecho">
+                      No Por Qué ?
+                  </label> <br>
+                      <label  class="radio-inline">
+                      <input type="radio" id="inlineRadioOptions"  value="Duracion de la rutina" ng-model="datos.por_que_no"></label>
                       Duracion de la rutina <br>
-                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      <label class="radio-inline">
+                      <input type="radio" id="inlineRadioOptions" value="Enfermedad" ng-model="datos.por_que_no"></label>
                       Enfermedad<br>
-                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="radio-inline">
+                      <input type="radio" id="inlineRadioOptions" value="Cansancio" ng-model="datos.por_que_no"></label>
                       Cansancio<br>
-                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="radio-inline">
+                      <input type="radio" id="inlineRadioOptions" value="Falta de tiempo" ng-model="datos.por_que_no">
                       Falta de tiempo
                        </label>
                 </div>                            
@@ -44,31 +51,37 @@
 
                 <div class="col col-100">
                   <h5>Reporta otras actividades</h5><br>
-                  <label class="checkbox-inline">                    
-                    <input type="checkbox" id="inlineCheckbox1" value="option1">
+                  <label class="radio-inline">                
+                    <input type="radio" id="inlineRadioOptions" value="Actividad física" ng-model="datos.otra_actividad"></label>
                      Actividad física<br>
-                     <input type="checkbox" id="inlineCheckbox1" value="option1">
+                     <label class="radio-inline">  
+                     <input type="radio" id="inlineRadioOptions" value="Algun deporte" ng-model="datos.otra_actividad"></label>
                      Algun deporte<br>
-                     <input type="checkbox" id="inlineCheckbox1" value="option1">
+                     <label class="radio-inline">  
+                     <input type="radio" id="inlineRadioOptions" value=" Juego recreativo" ng-model="datos.otra_actividad"></label>
                      Juego recreativo<br>
-                     Duracion: <input type="text"> Mins.
-                     Juego recreativo<br>
+                     Duracion: <input type="text" placeholder="0 mins" ng-model="datos.otra_actividad_minutos"> Mins.                    
                      <h5>¿ Como te sentiste ?</h5>
-                    <img src="img/ejercicio/nivel1/imagenes/1.png" width="10%" height="10%">
-                    <img src="img/ejercicio/nivel1/imagenes/2.png" width="10%" height="10%">
-                    <img src="img/ejercicio/nivel1/imagenes/3.png" width="10%" height="10%">
+                    <img on-touch="carita(1)" src="img/ejercicio/nivel1/imagenes/2.png" width="10%" height="10%">
+                    <img on-touch="carita(2)" src="img/ejercicio/nivel1/imagenes/1.png" width="10%" height="10%">
+                    <img on-touch="carita(3)" src="img/ejercicio/nivel1/imagenes/3.png" width="10%" height="10%">
                   </label>
                 </div>
               </div>
-
+              <br>
+              <br>
+              <br>
 
 
       </ion-content>
        <div class="bar bar-footer">  
-        <div class="title">         
-          <h4 class="rosa">
-            www.himfg.edo.mx            
-          </h4>                 
-        </div>
-      </div>
+    <div class="title">         
+      <h4 class="rosa">
+        <a ng-href="http://www.himfg.edo.mx"
+          onclick='window.open(this.href, "_system", "location=yes"); return false;'>  
+            www.himfg.edo.mx     
+        </a>        
+      </h4>                 
+    </div>
+  </div>
 </ion-view>
