@@ -428,6 +428,8 @@ angular.module('app.Controllers').controller('RegisterCtrl', function($scope, re
 })
 
 angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ionicPopup, $state) {
+    
+    console.log(localStorageService.get("access_token"))
     $scope.estatura;
     $scope.peso;
     
