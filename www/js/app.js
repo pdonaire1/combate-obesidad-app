@@ -269,7 +269,7 @@ angular.module('app')
           
           $urlRouterProvider.otherwise('/home');     
         })
-angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading','$ionicPopup','$state','localStorageService', function($scope,$ionicLoading,$ionicPopup,$state,localStorageService) {
+angular.module('app.Controllers').controller('prueba', ['$scope','$ionicLoading', 'comidaService', '$ionicPopup','$state','localStorageService', function($scope,$ionicLoading,$ionicPopup,$state,localStorageService) {
     
     var origen = {};
     var destino = {}
@@ -427,28 +427,103 @@ angular.module('app.Controllers').controller('IndiceCtrl', function($scope, $ion
     }
 })
 
-angular.module('app.Controllers').controller('comidaController', function($scope,localStorageService, registerService, $ionicPopup, $state) {
+angular.module('app.Controllers').controller('comidaController', 
+  function($scope, $http, localStorageService, comidaService, $ionicPopup, $state) {
     var access_token = localStorageService.get("access_token");
     $scope.data = {};
-    
+    $scope.data.frutas=[];
+    $scope.data.frutas[0]=0;
+    $scope.data.frutas[1]=0;
+    $scope.data.frutas[2]=0;
+    $scope.data.frutas[3]=0;
+    $scope.data.verduras=[];
+    $scope.data.verduras[0]=0;
+    $scope.data.verduras[1]=0;
+    $scope.data.verduras[2]=0;
+    $scope.data.verduras[3]=0;
+    $scope.data.cereales=[];
+    $scope.data.cereales[0]=0;
+    $scope.data.cereales[1]=0;
+    $scope.data.cereales[2]=0;
+    $scope.data.cereales[3]=0;
+    $scope.data.animal=[];
+    $scope.data.animal[0]=0;
+    $scope.data.animal[1]=0;
+    $scope.data.animal[2]=0;
+    $scope.data.animal[3]=0;
+    $scope.data.leche=[];
+    $scope.data.leche[0]=0;
+    $scope.data.leche[1]=0;
+    $scope.data.leche[2]=0;
+    $scope.data.leche[3]=0;
+    $scope.data.leguminosas=[];
+    $scope.data.leguminosas[0]=0;
+    $scope.data.leguminosas[1]=0;
+    $scope.data.leguminosas[2]=0;
+    $scope.data.leguminosas[3]=0;
+    $scope.data.grasas=[];
+    $scope.data.grasas[0]=0;
+    $scope.data.grasas[1]=0;
+    $scope.data.grasas[2]=0;
+    $scope.data.grasas[3]=0;
+    var count_error = 0;
+
     $scope.send = function() {
 
-     
+      // $http.psot($cons)
+      for (var i = 0; i < 4; i++) { //primero recorremos los food_time
+        for (var j = 1; j < 8; j++) {  // despues recorremos los food
+          // console.log(j);
+          // console.log($scope.data.frutas[i]);
+          var cant = 0;
+          if (j==1)
+            cant = $scope.data.frutas[i];
+          if (j==2)
+            cant = $scope.data.verduras[i];
+          if (j==3)
+            cant = $scope.data.cereales[i];
+          if (j==4)
+            cant = $scope.data.animal[i];
+          if (j==5)
+            cant = $scope.data.leche[i];
+          if (j==6)
+            cant = $scope.data.leguminosas[i];
+          if (j==7)
+            cant = $scope.data.grasas[i];
 
-      var parametros = {
-        "firstName": $scope.data.name,
-        "lastName": $scope.data.apellido,
-        "username": $scope.data.user,
-        "password": $scope.data.password,
-        "type": $scope.data.type,
-        "email": $scope.data.email,
+          var params = {
+            "access_token": localStorageService.get("access_token"),
+            "food_time_id" :  i+1,
+            "food_id": j,
+            "cant": cant
+          }
+          console.log(params);
+          
+          comidaService.send(params).success(function(data) {
+              if(data.success == false)
+                count_error = count_error + 1;
+          }).error(function(data) {
+             count_error = count_error + 1;
+          });
+        }
       }
-        registerService.register(parametros).success(function(data) {
-            $state.go('home');
-        }).error(function(data) {
-           
-        });
-    }
+      if (count_error > 0){
+        var alertPopup = $ionicPopup.alert({
+              title: 'Error al enviar!',
+              template: 'Por favor verifica tu red!'
+          });
+      }
+      else {
+        var alertPopup = $ionicPopup.alert({
+              title: 'Perfecto!',
+              template: 'Datos enviados con exitosamente'
+          });
+      }
+
+      $state.go('grafica');
+    };
+    
+    
 })
 
 angular.module('app.Controllers').controller('graficaCtrl', function($scope,localStorageService) {

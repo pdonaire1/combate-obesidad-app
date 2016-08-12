@@ -41,7 +41,7 @@ function constantsService() {
     };
 
     self.comidas.send = function () {
-        var url = URL_BASE + 'consumption/consumo';
+        var url = URL_BASE + 'consumption/create';
         return url;
     };
 
