@@ -52,6 +52,7 @@ function constantsService() {
 
      self.psicologia.get = function () {
         var url = URL_BASE + 'psicologia/getrest';
+
         return url;
     };
 
