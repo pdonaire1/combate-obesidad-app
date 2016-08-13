@@ -376,7 +376,7 @@ angular.module('app.Controllers').controller('LoginCtrl', function($scope, login
     $scope.login = function() {
         $ionicLoading.show({});
         loginService.token($scope.data.username, $scope.data.password).success(function(data) {
-            if(data=="El usuario solicitado no existe"){
+            if(data=="El usuario solicitado no existe" || data.success==false){
                 $ionicLoading.hide();
                 var alertPopup = $ionicPopup.alert({
                     title: 'Error al entrar!',
